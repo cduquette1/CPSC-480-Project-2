@@ -18,12 +18,33 @@ import org.junit.Test;
 
 public class ReversalTest {
 
+    @Test
+    public void testConstructor() {
+        Reversal temp = new Reversal();
+        assertTrue(temp != null);
+    }
+    
     @Test(expected = FileNotFoundException.class)
     public void testException() throws FileNotFoundException {
         File input = new File("temp.txt");
         File output = new File("temp.txt");
         
         Reversal.reverseFile(input, output);
+    }
+    
+    @Test
+    public void testEmptyFile() throws IOException {
+        File input = new File("Input.txt");
+        File output = new File("Output.txt");
+        
+        String expected = "";
+        addTextToFile("Input.txt", "");
+        addTextToFile("Output.txt", expected);
+        
+        Reversal.reverseFile(input, output);
+        String actual = covertFileToString("Output.txt");
+        
+        assertEquals("Empty File did not work", expected, actual);
     }
     
     @Test
@@ -97,6 +118,136 @@ public class ReversalTest {
         String actual = covertFileToString("Output.txt");
         
         assertEquals("Six lines did not work", expected, actual);
+    }
+    
+    @Test
+    public void testLargeData() throws IOException {
+        File input = new File("Input.txt");
+        File output = new File("Output.txt");
+        
+        String inputText = "a a c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+                + System.lineSeparator() +
+                "a b c d e f g h i j k l m n o p q r s t u v w x z z";
+        
+        String expected = "z z x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() + 
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() + 
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() + 
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() + 
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c b a"
+                + System.lineSeparator() + System.lineSeparator() +
+                "z y x w v u t s r q p o n m l k j i h g f e d c a a";
+        
+        addTextToFile("Input.txt", inputText);
+        addTextToFile("Output.txt", expected);
+
+        Reversal.reverseFile(input, output);
+        String actual = covertFileToString("Output.txt");
+        
+        assertEquals("Large data did not work", expected, actual);
     }
     
     private void addTextToFile(String fileName, String text) throws FileNotFoundException {
