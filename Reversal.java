@@ -31,16 +31,18 @@ public class Reversal {
             while((text = reader.readLine()) != null) {
                 allWords.add(" ");
                 String[] words = text.split(" ");
-                for(int i = 0; i < words.length; i++) {
-                    allWords.add(words[i]);
+                allWords.add(words[0]);
+                for(int i = 1; i < words.length; i++) {
+                    allWords.add(words[i] + " ");
                 }
+                
             }
             
             for(int i = (allWords.size() - 1); i > 1 ; i--) {
                 if (!(allWords.get(i).equals(" "))) 
-                    writer.print(allWords.get(i) + " ");
+                    writer.print(allWords.get(i));
                 else
-                    writer.println();
+                    writer.print(System.lineSeparator());
             }
             writer.print(allWords.get(1));
             
