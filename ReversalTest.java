@@ -41,7 +41,63 @@ public class ReversalTest {
         assertEquals("One line did not work", expected, actual);
     }
     
+    @Test
+    public void testTwoLines() throws IOException {
+        File input = new File("Input.txt");
+        File output = new File("Output.txt");
+        
+        String expected = "elit. adipiscing consectetur" + System.lineSeparator() +
+                          "amet sit dolor ipsum Lorem";
+        addTextToFile("Input.txt", "Lorem ipsum dolor sit amet" + System.lineSeparator() +
+                                   "consectetur adipiscing elit.");
+        addTextToFile("Output.txt", expected);
+
+        Reversal.reverseFile(input, output);
+        String actual = covertFileToString("Output.txt");
+        
+        assertEquals("Two lines did not work", expected, actual);
+    }
     
+    
+    @Test
+    public void testThreeLines() throws IOException {
+        File input = new File("Input.txt");
+        File output = new File("Output.txt");
+        
+        String expected = "elit. adipiscing consectetur" + System.lineSeparator() +
+                          System.lineSeparator() + "amet sit dolor ipsum Lorem";
+        addTextToFile("Input.txt", "Lorem ipsum dolor sit amet" + System.lineSeparator() +
+                                   System.lineSeparator() + "consectetur adipiscing elit.");
+        addTextToFile("Output.txt", expected);
+
+        Reversal.reverseFile(input, output);
+        String actual = covertFileToString("Output.txt");
+        
+        assertEquals("Three lines did not work", expected, actual);
+    }
+    
+    @Test
+    public void testSixLines() throws IOException {
+        File input = new File("Input.txt");
+        File output = new File("Output.txt");
+        
+        String expected = "elit. adipiscing consectetur" + System.lineSeparator() +
+                          System.lineSeparator() + "amet sit dolor ipsum Lorem" +
+                          System.lineSeparator() + System.lineSeparator() +
+                          "elit. adipiscing consectetur" + System.lineSeparator() +
+                          System.lineSeparator() + "amet sit dolor ipsum Lorem";
+        addTextToFile("Input.txt", "Lorem ipsum dolor sit amet" + System.lineSeparator() +
+                                   System.lineSeparator() + "consectetur adipiscing elit." + 
+                                   System.lineSeparator() + System.lineSeparator() + 
+                                   "Lorem ipsum dolor sit amet" + System.lineSeparator() +
+                                   System.lineSeparator() + "consectetur adipiscing elit.");
+        addTextToFile("Output.txt", expected);
+
+        Reversal.reverseFile(input, output);
+        String actual = covertFileToString("Output.txt");
+        
+        assertEquals("Six lines did not work", expected, actual);
+    }
     
     private void addTextToFile(String fileName, String text) throws FileNotFoundException {
         PrintWriter writer = new PrintWriter(fileName);
@@ -53,11 +109,17 @@ public class ReversalTest {
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
         String text = null;
         String allWords = "";
+        boolean firstLine = true;
         
         while((text = reader.readLine()) != null) {
-            allWords = allWords + text;
+            if(firstLine) {
+                allWords = allWords + text;
+                firstLine = false;
+            }
+            else {
+                allWords = allWords + System.lineSeparator() + text;
+            }    
         }
-        
         return allWords;
     }
 
