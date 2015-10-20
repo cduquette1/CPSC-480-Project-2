@@ -36,12 +36,14 @@ public class Reversal {
                 }
             }
             
-            for(int i = (allWords.size() - 1); i >= 0 ; i--) {
+            for(int i = (allWords.size() - 1); i > 1 ; i--) {
                 if (!(allWords.get(i).equals(" "))) 
                     writer.print(allWords.get(i) + " ");
                 else
                     writer.println();
             }
+            writer.print(allWords.get(1));
+            
             writer.close();
             
         }
