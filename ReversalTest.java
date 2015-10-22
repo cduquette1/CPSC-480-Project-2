@@ -32,6 +32,14 @@ public class ReversalTest {
         Reversal.reverseFile(input, output);
     }
     
+    @Test(expected = IOException.class)
+    public void testIOException() throws FileNotFoundException {
+        File input = new File("temp.txt");
+        File output = new File("temp.txt");
+        
+        Reversal.reverseFile(input, output);
+    }
+    
     @Test
     public void testEmptyFile() throws IOException {
         File input = new File("Input.txt");
