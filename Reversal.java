@@ -26,7 +26,7 @@ public class Reversal {
         PrintWriter writer = new PrintWriter(output);
         String text = null;
         ArrayList<String> allWords = new ArrayList<String>();
-        
+
         try {
             while((text = reader.readLine()) != null) {
                 allWords.add(" ");
@@ -35,23 +35,20 @@ public class Reversal {
                 for(int i = 1; i < words.length; i++) {
                     allWords.add(words[i] + " ");
                 }
-                
             }
-            
-            for(int i = (allWords.size() - 1); i > 1 ; i--) {
-                if (!(allWords.get(i).equals(" "))) 
-                    writer.print(allWords.get(i));
-                else
-                    writer.print(System.lineSeparator());
-            }
-            writer.print(allWords.get(1));
-            
-            writer.close();
-            
         }
         catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); 
         }
         
+        for(int i = (allWords.size() - 1); i > 1 ; i--) {
+            if (!(allWords.get(i).equals(" "))) 
+                writer.print(allWords.get(i));
+            else
+                writer.print(System.lineSeparator());
+        }
+        writer.print(allWords.get(1));
+        
+        writer.close();
     }
 }
